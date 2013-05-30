@@ -1,6 +1,7 @@
 /**
  * 建立一个拖拉选中区域
  * 
+ * @author yajie
  * @Import("module.createScreenLayer")
  */
 PAK.register("module.createSelectArea",function($){
@@ -130,7 +131,15 @@ PAK.register("module.createSelectArea",function($){
       });
       
       body.css("cursor",tempCursor);
+      var fireSelect = function(){
+        // getBoundRectClient
+        that.trigger("select",{});
+      };
+      node.dbClick(fireSelect);
       
+      _this.layer.on("destroy",function(){
+        node.off("dbClick",fireSelect);
+      });
     });
     
     

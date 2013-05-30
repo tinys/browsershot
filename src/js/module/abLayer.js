@@ -1,5 +1,6 @@
 /**
  * 一个随风飘荡的浮层
+ * @author yajie
  */
 PAK.register("module.abLayer",function($){
   return function(opt){

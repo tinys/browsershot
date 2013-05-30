@@ -1,6 +1,7 @@
 /**
  * 用来给一个layer 添加移动的效果
  * 
+ * @author yajie
  */
 PAK.register("module.moveLayerEvt",function($){
   return function(layer){
@@ -12,6 +13,6 @@ PAK.register("module.moveLayerEvt",function($){
     };
     layer.on("destroy",function(){
       
-    })
+    });
   }
 })

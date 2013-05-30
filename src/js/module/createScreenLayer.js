@@ -1,5 +1,6 @@
 /**
  * 创建一个悬浮的div，这样拖动选择的时候不至于将下面的文字选中
+ * @author yajie
  */
 PAK.register("module.createScreenLayer",function($){
   var that = {};

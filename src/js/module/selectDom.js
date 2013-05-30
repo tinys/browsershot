@@ -1,5 +1,7 @@
 /**
  * 选中dom
+ * 
+ * @author yajie
  */
 PAK.register("module.selectDom",function($){
   return function(){
