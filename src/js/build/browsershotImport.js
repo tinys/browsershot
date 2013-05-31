@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+$Import("jQuery");
+$Import("html2canvas");
+$Import("core.PAK");
+$Import("module.createScreenLayer");
+$Import("module.abLayer");
+$Import("module.listenEsc");
+$Import("module.bindMoveLayer");
+$Import("module.createSelectArea");
+$Import("browsershot");
