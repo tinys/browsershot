@@ -35,19 +35,26 @@ PAK.register("module.createSelectArea",function($){
       var width = end.l - start.l ,
       height = end.t - start.t;
       
-      // 从右往左滑动了
-      if(width <0 ){
-        style.left = end.l + Math.abs(width);
+      style.width = width;
+      style.height = height;
+      
+      // 向上滑动
+      if(height < 0){
+        style.top = end.t;
+        style.height = start.t - end.t;
       }
-      // 从下往上
-      if(height < 0 ){
-        style.top = end.t + Math.abs(height);
-      }
-      var min = opt.min || 60;
-      width = Math.abs(width) < min?min:Math.abs(width);
-      height = Math.abs(height) < min?min:Math.abs(height);
-      style.width = width +"px";
-      style.height = height +"px";
+      // 向左滑动
+      if(width < 0){
+        style.left = end.l;
+        style.width = start.l - end.l;
+      };
+      $.each(style,function(i,a){
+        if(EventBind.isDown == 2 && (i =="width" || i == "height")){
+          a = Math.max(a,opt.min || 30);
+        }
+        style[i] = a+"px";
+      });
+      
       _this.layer.show(style);
     };
     var defaultValue = {l:0,
@@ -71,6 +78,7 @@ PAK.register("module.createSelectArea",function($){
         var startPoint = EventBind.startPoint;
         startPoint.l = evt.pageX;
         startPoint.t = evt.pageY;
+        return false;
       },
       mouseUp:function(evt){
         if(EventBind.isDown !== 1){
@@ -134,7 +142,10 @@ PAK.register("module.createSelectArea",function($){
       body.css("cursor",tempCursor);
       var fireSelect = function(){
         // getBoundRectClient
-        that.trigger("select",{});
+        var data = node.position();
+        data.width = node.width();
+        data.height = node.height();
+        that.trigger("select",data);
       };
       node.dblclick(fireSelect);
       
@@ -158,11 +169,17 @@ PAK.register("module.createSelectArea",function($){
     body.css("cursor","crosshair")
     
     
+    that.getLayer = function(){
+      return _this.layer;
+    };
+    
     that.destroy = function(){
       $.each(evtList,function(i,a){
         body.off(i,a);
       });
       body.css("cursor",tempCursor);
+      _this.layer.destroy();
+      $.module.createScreenLayer.destroy();
     };
     return that;
   }

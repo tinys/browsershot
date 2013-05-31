@@ -166,24 +166,21 @@
             This is a nonsensical document, but syntactically valid HTML 4.0. All 100% conformant CSS1 agents should be able to render the document elements above this paragraph <b>indistinguishably</b>
             (to the pixel) from this reference rendering, (except font rasterization and form widgets). All discrepancies should be traceable to CSS1 implementation shortcomings. Once you have finished evaluating this test, you can return to the <A HREF="sec5526c.htm" style="text-decoration:none">parent page</A>.
         </p>
-        <script type="text/javascript" src="../src/js/jQuery.js">
-        </script>
-        <script type="text/javascript" src="../src/js/core/PAK.js">
-        </script>
+        <script type="text/javascript" src="../src/js/jQuery.js"></script>
+        <script type="text/javascript" src="../src/js/core/PAK.js"></script>
+        <script type="text/javascript" src="../src/js/module/abLayer.js"></script>
         <script type="text/javascript" src="../src/js/module/listenEsc.js"></script>
-        <script type="text/javascript" src="../src/js/module/selectDom.js">
-        </script>
-        <script type="text/javascript" src="../src/js/html2canvas.js">
-        </script>
+        <script type="text/javascript" src="../src/js/module/showShot.js"></script>
+        <script type="text/javascript" src="../src/js/module/selectDom.js"></script>
+        <script type="text/javascript" src="../src/js/html2canvas.js"></script>
+        <script type="text/javascript" src="../src/js/domshot.js"></script>
         <script>
-            var selectDiv = PAK.module.selectDom();
-            selectDiv.on("select",function(evt,data){
-              html2canvas(data,{
-                onrendered:function(canvas){
-                  
-                }
-              })
-            })
+          PAK.domshot.setArgs({
+          })
+          PAK.domshot.begin();
+          PAK.domshot.on("shot",function(type,data){
+             console.log(data);
+           });
         </script>
     </body>
 </html>

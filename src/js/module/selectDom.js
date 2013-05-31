@@ -26,14 +26,15 @@ PAK.register("module.selectDom",function($){
       element = $(element);
       var position = element.offset();
       _this.layer.css({
-        width:element.width()+"px",
-        height:element.height()+"px",
+        width:element.outerWidth()+"px",
+        height:element.outerHeight()+"px",
         top:position.top,
         left:position.left
       });
       _this.layer.show();
       $(window).off("keyup",EvtObject.cancelSelect);
-      $(window).keyup(EvtObject.cancelSelect);
+      
+      $.module.listenEsc.add(EvtObject.cancelSelect);
     };
     
     var EvtObject = {
@@ -47,11 +48,9 @@ PAK.register("module.selectDom",function($){
         return false;
       },
       cancelSelect:function(evt){
-        if(evt.keyCode == "27"){
-          _this.layer.hide(0.5);
-          _this.target = false;
-          $(window).off("keyup",EvtObject.cancelSelect);
-        }
+        _this.layer.hide(0.5);
+        _this.target = false;
+        $.module.listenEsc.remove(EvtObject.cancelSelect);
       }
     };
     var bindEvent = function(){
@@ -73,7 +72,7 @@ PAK.register("module.selectDom",function($){
     };
     that.getTarget = function(){
       return _this.target;
-    }
+    };
     init();
     return that;
   }
